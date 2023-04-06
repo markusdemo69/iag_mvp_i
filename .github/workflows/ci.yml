@@ -2,9 +2,9 @@ name: CI
 
 on:
   pull_request:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
-    branches: [ main ]
+    branches: [ master ]
   schedule:
     - cron: '00 2 * * *'
 
@@ -28,6 +28,9 @@ jobs:
       - name: Run Playwright Tests 
         run: |
           npm run test
+        env:
+          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+          USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
 
       - uses: actions/upload-artifact@v3
         with:
